@@ -3,6 +3,7 @@ name: API Automated Testing with Newman
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -27,6 +28,8 @@ jobs:
         newman run ReqRes_Collection.json \
           -e ReqRes_Environment.json \
           -d users.csv \
+          --delay-request 1000 \
+          --suppress-exit-code \
           --reporters cli,htmlextra \
           --reporter-htmlextra-export report.html
 
